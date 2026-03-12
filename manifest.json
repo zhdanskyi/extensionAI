@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "AI Brand Visibility Checker",
+  "version": "1.0",
+  "description": "Analiza si tu marca es mencionada en las respuestas de ChatGPT ante un prompt específico.",
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://api.openai.com/*"
+  ]
+}
