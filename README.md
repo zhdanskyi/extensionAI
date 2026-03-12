@@ -1,4 +1,4 @@
-Que hace exactamente este invento
+Que hace exactamente este invento? -
 Le manda una pregunta a ChatGPT por detras y revisa el texto que le devuelve para ver si menciona a tu marca o a la de tu competencia. Es super practico para ver si la inteligencia artificial te tiene en cuenta o si tienes que mejorar tu marketing.
 
 Como instalarla en tu ordenador
