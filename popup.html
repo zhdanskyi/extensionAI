@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <style>
-    /* Variables de color para un diseño moderno */
     :root {
-      --primary: #f05a28; /* Color naranja estilo Ubersuggest */
+      --primary: #f05a28;
       --primary-hover: #d0481d;
       --bg-color: #f9fafb;
       --card-bg: #ffffff;
@@ -13,150 +12,45 @@
       --text-muted: #6b7280;
       --border-color: #e5e7eb;
     }
-
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      width: 480px; /* Diseño más ancho y cómodo */
+      width: 480px;
       margin: 0;
       padding: 20px;
       background-color: var(--bg-color);
       color: var(--text-main);
     }
-
-    h2 {
-      margin-top: 0;
-      margin-bottom: 5px;
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--text-main);
-    }
-
-    p.subtitle {
-      margin-top: 0;
-      margin-bottom: 20px;
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    /* Tarjetas para agrupar contenido */
-    .section-card {
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 15px;
-      margin-bottom: 15px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    }
-
-    .section-title {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--text-muted);
-      font-weight: 600;
-      margin-bottom: 12px;
-      margin-top: 0;
-    }
-
-    label {
-      font-size: 13px;
-      font-weight: 500;
-      display: block;
-      margin-bottom: 6px;
-      margin-top: 10px;
-    }
+    h2 { margin-top: 0; margin-bottom: 5px; font-size: 20px; font-weight: 700; color: var(--text-main); }
+    p.subtitle { margin-top: 0; margin-bottom: 20px; font-size: 13px; color: var(--text-muted); }
+    .section-card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 15px; margin-bottom: 15px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+    label { font-size: 13px; font-weight: 500; display: block; margin-bottom: 6px; margin-top: 10px; }
     label:first-of-type { margin-top: 0; }
-
-    input, textarea {
-      width: 100%;
-      padding: 10px 12px;
-      box-sizing: border-box;
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      font-size: 14px;
-      font-family: inherit;
-      transition: border-color 0.2s ease;
-    }
-
-    input:focus, textarea:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(240, 90, 40, 0.1);
-    }
-
-    textarea {
-      height: 90px;
-      resize: vertical;
-    }
-
-    /* Botón principal */
-    button {
-      width: 100%;
-      padding: 12px;
-      background-color: var(--primary);
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 15px;
-      font-weight: 600;
-      transition: background-color 0.2s ease, transform 0.1s ease;
-    }
-
+    input, textarea { width: 100%; padding: 10px 12px; box-sizing: border-box; border: 1px solid var(--border-color); border-radius: 6px; font-size: 14px; font-family: inherit; }
+    input:focus, textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(240, 90, 40, 0.1); }
+    textarea { height: 90px; resize: vertical; }
+    button { width: 100%; padding: 12px; background-color: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 15px; font-weight: 600; }
     button:hover { background-color: var(--primary-hover); }
-    button:active { transform: scale(0.98); }
-    button:disabled { background-color: #ccc; cursor: not-allowed; transform: none; }
-
-    /* Resultados y estados */
-    #result {
-      margin-top: 15px;
-      font-size: 14px;
-      padding: 15px;
-      border-radius: 6px;
-      display: none;
-      line-height: 1.5;
-    }
+    button:disabled { background-color: #ccc; cursor: not-allowed; }
+    #result { margin-top: 15px; font-size: 14px; padding: 15px; border-radius: 6px; display: none; line-height: 1.5; }
     .success { background-color: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
     .fail { background-color: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
-    
-    /* Animación de carga moderna */
-    .loading-container {
-      display: none;
-      text-align: center;
-      margin-top: 20px;
-    }
-    .spinner {
-      border: 3px solid rgba(0,0,0,0.1);
-      border-left-color: var(--primary);
-      border-radius: 50%;
-      width: 24px;
-      height: 24px;
-      animation: spin 1s linear infinite;
-      margin: 0 auto 10px auto;
-    }
+    .loading-container { display: none; text-align: center; margin-top: 20px; }
+    .spinner { border: 3px solid rgba(0,0,0,0.1); border-left-color: var(--primary); border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; margin: 0 auto 10px auto; }
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     .loading-text { font-size: 13px; color: var(--text-muted); font-weight: 500; }
-
   </style>
 </head>
 <body>
 
   <h2>Visibilidad de Marca IA</h2>
-  <p class="subtitle">Analiza si tu marca aparece en las respuestas de ChatGPT.</p>
+  <p class="subtitle">Analiza si tu marca aparece en las respuestas de la Inteligencia Artificial.</p>
   
   <div class="section-card">
-    <h3 class="section-title">Configuración</h3>
-    <label for="apiKey">API Key de OpenAI:</label>
-    <input type="password" id="apiKey" placeholder="sk-...">
-  </div>
-  
-  <div class="section-card">
-    <h3 class="section-title">Análisis</h3>
     <label for="brand">Tu Marca (o la de tu competidor):</label>
     <input type="text" id="brand" placeholder="Ej: Neil Patel, Unir, Nike...">
     
     <label for="prompt">Prompt (Pregunta del usuario):</label>
-    <textarea id="prompt" placeholder="Ej: ¿Cuáles son las mejores universidades online para estudiar marketing?"></textarea>
+    <textarea id="prompt" placeholder="Ej: Cuales son las mejores universidades online para estudiar marketing?"></textarea>
   </div>
   
   <button id="checkBtn">Analizar Visibilidad</button>

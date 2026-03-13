@@ -1,45 +1,46 @@
+const MI_API_KEY_SECRETA = "AIzaSyBt8Rjlb6-L64YL_mw_M6m-7jPY9bIQyg4"; // API KEY
+
 document.addEventListener('DOMContentLoaded', () => {
-  const apiKeyInput = document.getElementById('apiKey');
   const brandInput = document.getElementById('brand');
   const promptInput = document.getElementById('prompt');
   const checkBtn = document.getElementById('checkBtn');
   const resultDiv = document.getElementById('result');
   const loadingDiv = document.getElementById('loading');
 
-  // Cargar datos guardados previamente
-  chrome.storage.local.get(['apiKey', 'brand'], (data) => {
-    if (data.apiKey) apiKeyInput.value = data.apiKey;
+  // Cargar marca guardada previamente para no escribirla siempre
+  chrome.storage.local.get(['brand'], (data) => {
     if (data.brand) brandInput.value = data.brand;
   });
 
   checkBtn.addEventListener('click', async () => {
-    const apiKey = apiKeyInput.value.trim();
     const brand = brandInput.value.trim();
-    const prompt = promptInput.value.trim();
+    const promptText = promptInput.value.trim();
 
-    if (!apiKey || !brand || !prompt) {
-      alert("Por favor, rellena todos los campos.");
+    if (!brand || !promptText) {
+      alert("Por favor, rellena tu marca y la pregunta.");
       return;
     }
 
-    // Guardar la API Key y la marca para futuros usos
-    chrome.storage.local.set({ apiKey, brand });
+    // Guardar la marca para la proxima vez
+    chrome.storage.local.set({ brand });
 
     resultDiv.style.display = 'none';
     loadingDiv.style.display = 'block';
     checkBtn.disabled = true;
 
     try {
-      const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      //api keys gemini 
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${"AIzaSyBt8Rjlb6-L64YL_mw_M6m-7jPY9bIQyg4"}`;
+
+      const response = await fetch(url, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${apiKey}`
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          model: "gpt-3.5-turbo",
-          messages: [{ role: "user", content: prompt }],
-          temperature: 0.7
+          contents: [{
+            parts: [{ text: promptText }]
+          }]
         })
       });
 
@@ -49,8 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
         throw new Error(data.error.message);
       }
 
-      const aiResponseText = data.choices[0].message.content;
-      const regex = new RegExp(brand, 'i'); // Búsqueda ignorando mayúsculas/minúsculas
+      const aiResponseText = data.candidates[0].content.parts[0].text;
+      const regex = new RegExp(brand, 'i');
       const isMentioned = regex.test(aiResponseText);
 
       loadingDiv.style.display = 'none';
@@ -58,10 +59,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (isMentioned) {
         resultDiv.className = 'success';
-        resultDiv.innerHTML = `<strong>¡Éxito!</strong> Tu marca "<b>${brand}</b>" fue mencionada en la respuesta generada por la IA.<br><br><i>Extracto de la IA:</i><br> ${aiResponseText.substring(0, 150)}...`;
+        resultDiv.innerHTML = `<strong>Exito!</strong> Tu marca "<b>${brand}</b>" fue mencionada.<br><br><i>Extracto de la IA:</i><br> ${aiResponseText.substring(0, 150)}...`;
       } else {
         resultDiv.className = 'fail';
-        resultDiv.innerHTML = `<strong>Sin mención.</strong> La IA no mencionó tu marca en la respuesta para este prompt. ¡Oportunidad de mejora SEO/GEO!`;
+        resultDiv.innerHTML = `<strong>Sin mencion.</strong> La IA no menciono tu marca para este prompt. Toca mejorar el SEO/GEO!`;
       }
 
     } catch (error) {

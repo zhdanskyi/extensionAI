@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "AI Brand Visibility Checker",
   "version": "1.0",
-  "description": "Analiza si tu marca es mencionada en las respuestas de ChatGPT ante un prompt específico.",
+  "description": "Analiza si tu marca es mencionada en las respuestas de Gemini ante un prompt especifico.",
   "action": {
     "default_popup": "popup.html"
   },
@@ -10,6 +10,6 @@
     "storage"
   ],
   "host_permissions": [
-    "https://api.openai.com/*"
+    "https://generativelanguage.googleapis.com/*"
   ]
 }
