@@ -1,4 +1,4 @@
-const MI_API_KEY_SECRETA = "AIzaSyBt8Rjlb6-L64YL_mw_M6m-7jPY9bIQyg4"; // API KEY
+const MI_API_KEY_SECRETA = ""; // API KEY
 
 document.addEventListener('DOMContentLoaded', () => {
   const brandInput = document.getElementById('brand');
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       //api keys gemini 
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${"AIzaSyBt8Rjlb6-L64YL_mw_M6m-7jPY9bIQyg4"}`;
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${""}`;
 
       const response = await fetch(url, {
         method: 'POST',
