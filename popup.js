@@ -1,5 +1,5 @@
-const MI_API_KEY_SECRETA = "AIzaSyBt8Rjlb6-L64YL_mw_M6m-7jPY9bIQyg4"; // API KEY
-
+import dotenv from 'dotenv';
+dotenv.config();
 document.addEventListener('DOMContentLoaded', () => {
   const brandInput = document.getElementById('brand');
   const promptInput = document.getElementById('prompt');
@@ -30,7 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       //api keys gemini 
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${"AIzaSyBt8Rjlb6-L64YL_mw_M6m-7jPY9bIQyg4"}`;
+      //se puede usar la misma api key para varios modelos, solo hay que cambiar el endpoint
+      //se pueden usar otros modelos como gemini-1.5-flash, gemini-2-flash, etc. dependiendo de la necesidad de velocidad o calidad
+      //se pueden usar otras IAS como gpt-4, gpt-3.5-turbo, etc. pero hay que cambiar el endpoint y el formato de la request
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.MI_API_KEY_SECRETA}`;
 
       const response = await fetch(url, {
         method: 'POST',
